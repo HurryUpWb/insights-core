@@ -76,7 +76,7 @@ class RedhatRelease(Parser):
         }
 
         product_lower = product.lower()
-        if 'red hat enterprise linux' in product_lower:
+        if 'red hat enterprise linux' in product_lower or 'red hat enterprise virtual' in product_lower:
             self.short_product = 'RHEL'
         elif 'centos' in product_lower:
             self.short_product = 'CentOS'
