@@ -71,10 +71,10 @@ def test_RedHatRelease_centos_7_9():
 def test_RedHatRelease_centos_7_9_both():
     un = Uname(context_wrap(UNAME_CENTOS_7_9))
     rel = RedhatRelease(context_wrap(REDHAT_RELEASE_CENTOS_7_9))
-    result = RedHatRelease(None, rel)
+    result = RedHatRelease(un, rel)
     assert result.major == 7
     assert result.minor == 9
-    assert result.rhel == result.rhel7 == '7.9.2009'
+    assert result.rhel == result.rhel7 == '7.9'  # Not as nice as just /etc/redhat_release
     assert result.rhel8 is None
     assert result.rhel9 is None
 
@@ -92,11 +92,11 @@ def test_RedHatRelease_centos_8_5():
 def test_RedHatRelease_centos_8_5_both():
     un = Uname(context_wrap(UNAME_CENTOS_8_5))
     rel = RedhatRelease(context_wrap(REDHAT_RELEASE_CENTOS_8_5))
-    result = RedHatRelease(None, rel)
+    result = RedHatRelease(un, rel)
     assert result.major == 8
     assert result.minor == 5
     assert result.rhel7 is None
-    assert result.rhel == result.rhel8 == '8.5.2111'
+    assert result.rhel == result.rhel8 == '8.5'  # Not as nice as just /etc/redhat_release
     assert result.rhel9 is None
 
 
