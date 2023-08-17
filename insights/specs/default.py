@@ -115,6 +115,7 @@ class DefaultSpecs(Specs):
     bond = glob_file("/proc/net/bonding/*")
     bond_dynamic_lb = glob_file("/sys/class/net/*/bonding/tlb_dynamic_lb")
     boot_loader_entries = glob_file("/boot/loader/entries/*.conf")
+    buddyinfo = simple_file("/proc/buddyinfo")
     brctl_show = simple_command("/usr/sbin/brctl show")
     candlepin_broker = candlepin_broker.candlepin_broker
     cciss = glob_file("/proc/driver/cciss/cciss*")
@@ -292,7 +293,7 @@ class DefaultSpecs(Specs):
     init_process_cgroup = simple_file("/proc/1/cgroup")
     initctl_lst = simple_command("/sbin/initctl --system list")
     insights_client_conf = simple_file('/etc/insights-client/insights-client.conf')
-    insights_client_exp_sed = simple_file('/etc/insights-client/.exp.sed')  # INSPEC-414
+    insights_client_exp_sed = first_file(['/etc/insights-client/.exp.sed', '/etc/.exp.sed'])  # INSPEC-414
     installed_rpms = simple_command("/bin/rpm -qa --qf '%s'" % _rpm_format, context=HostContext, signum=signal.SIGTERM)
     interrupts = simple_file("/proc/interrupts")
     ip6tables = simple_command("/sbin/ip6tables-save")
@@ -408,6 +409,7 @@ class DefaultSpecs(Specs):
     mariadb_log = simple_file("/var/log/mariadb/mariadb.log")
     max_uid = simple_command("/bin/awk -F':' '{ if($3 > max) max = $3 } END { print max }' /etc/passwd")
     md5chk_files = foreach_execute(md5chk.files, "/usr/bin/md5sum %s", keep_rc=True)
+    mdadm_D = simple_command("/usr/sbin/mdadm -D /dev/md*")
     mdstat = simple_file("/proc/mdstat")
     meminfo = first_file(["/proc/meminfo", "/meminfo"])
     messages = simple_file("/var/log/messages")
